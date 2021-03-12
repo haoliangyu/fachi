@@ -1,0 +1,30 @@
+{
+  "name": "fachi",
+  "version": "0.0.0",
+  "description": "a modern benchmark runner for JavaScript and TypeScript",
+  "scripts": {
+    "init": "lerna init"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/haoliangyu/fachi.git"
+  },
+  "keywords": [
+    "benchmark",
+    "runner",
+    "javascript",
+    "typescript"
+  ],
+  "author": "Haoliang Yu <haholiang.yu@outlook.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/haoliangyu/fachi/issues"
+  },
+  "homepage": "https://github.com/haoliangyu/fachi#readme",
+  "devDependencies": {
+    "lerna": "^4.0.0"
+  },
+  "workspaces": [
+    "./packages/*"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "extends": [
+    "oclif",
+    "oclif-typescript"
+  ],
+  "rules": {
+    "object-curly-spacing": [
+      "warn",
+      "always"
+    ],
+    "comma-dangle": [
+      "warn",
+      "never"
+    ],
+    "space-before-function-paren": []
+  }
+}
