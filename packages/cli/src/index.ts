@@ -1,7 +1,7 @@
 import { Command, flags } from '@oclif/command'
 import { sync as globSync } from 'glob'
 
-class FachiCli extends Command {
+class Fachi extends Command {
   // allows to pass in multiple file paths
   static strict = false
 
@@ -13,7 +13,7 @@ class FachiCli extends Command {
   }
 
   async run() {
-    const { flags, argv } = this.parse(FachiCli)
+    const { flags, argv } = this.parse(Fachi)
     const filePaths = argv.reduce((results: string[], globPattern: string): string[] => {
       return [...results, ...globSync(globPattern)]
     }, [])
@@ -24,4 +24,4 @@ class FachiCli extends Command {
   }
 }
 
-export = FachiCli
+export = Fachi

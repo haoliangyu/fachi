@@ -12,6 +12,6 @@
       "warn",
       "never"
     ],
-    "space-before-function-paren": []
+    "space-before-function-paren": ["warn", "always"]
   }
 }
