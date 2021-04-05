@@ -12,14 +12,14 @@ class Fachi extends Command {
     help: flags.help({ char: 'h' })
   }
 
-  async run() {
-    const { flags, argv } = this.parse(Fachi)
+  async run () {
+    const { argv } = this.parse(Fachi)
     const filePaths = argv.reduce((results: string[], globPattern: string): string[] => {
       return [...results, ...globSync(globPattern)]
     }, [])
 
     filePaths.forEach((path) => {
-      require(path);
+      require(path)
     })
   }
 }

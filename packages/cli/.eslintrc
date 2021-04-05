@@ -12,6 +12,12 @@
       "warn",
       "never"
     ],
-    "space-before-function-paren": ["warn", "always"]
+    "space-before-function-paren": ["warn", "always"],
+    "interface-name-prefix": "always",
+    "arrow-parens": [
+      "warn",
+      "always"
+    ],
+    "@typescript-eslint/no-empty-function": "off"
   }
 }
