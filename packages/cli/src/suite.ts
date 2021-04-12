@@ -5,6 +5,8 @@ export type EventHandler = () => void | Promise<void>;
 export type EventType = 'before' | 'beforeEach' | 'after' | 'afterEach'
 
 export class Suite {
+  private name: string;
+
   private cases: Case[] = []
 
   private before: EventHandler = () => {};
@@ -15,8 +17,12 @@ export class Suite {
 
   private afterEach: EventHandler = () => { };
 
-  addCase (benmark: Case = 0): void {
-    this.cases.push(benmark)
+  constructor (name: string) {
+    this.name = name
+  }
+
+  addCase (benmarkCase: Case): void {
+    this.cases.push(benmarkCase)
   }
 
   setBefore (handler: EventHandler) {
@@ -33,6 +39,18 @@ export class Suite {
 
   setAfterEach (handler: EventHandler) {
     this.setEventHandler('afterEach', handler)
+  }
+
+  async run () {
+    await this.before()
+
+    for (const benchmarkCase of this.cases) {
+      await this.beforeEach()
+      await benchmarkCase.run()
+      await this.afterEach()
+    }
+
+    await this.after()
   }
 
   private setEventHandler (eventType: EventType, handler: EventHandler) {

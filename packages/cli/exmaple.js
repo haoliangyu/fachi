@@ -10,11 +10,7 @@ suite('search', function () {
   });
 
   bench('by id', async function () {
-
-  });
-
-  bench('by tag', async function () {
-
+    console.log('hello world')
   });
 
   afterEach(async function () {
