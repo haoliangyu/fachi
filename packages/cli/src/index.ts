@@ -1,8 +1,9 @@
-import { join } from 'path'
+import { resolve } from 'path'
 import { existsSync } from 'fs'
 import { Command, flags } from '@oclif/command'
 import { sync as globSync } from 'globby'
 import isGlob from 'is-glob'
+import { suite } from './global'
 
 class Fachi extends Command {
   // allows to pass in multiple file paths
@@ -23,12 +24,16 @@ class Fachi extends Command {
 
       if (isGlob(pattern)) {
         newPaths.push(...globSync(pattern, { cwd }))
-      } else if (existsSync(join(cwd, pattern))) {
-        newPaths.push(join(cwd, pattern))
+      } else if (existsSync(resolve(cwd, pattern))) {
+        newPaths.push(resolve(cwd, pattern))
+      } else {
+        console.log('nothing found', pattern)
       }
 
       return [...results, ...newPaths]
     }, [])
+
+    Object.assign(global, { suite })
 
     filePaths.forEach((path) => {
       require(path)

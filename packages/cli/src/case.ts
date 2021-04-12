@@ -31,7 +31,7 @@ export class Case {
           promisedResult = result as Promise<void>
         }
 
-        promisedResult.then(deferred.resolve)
+        promisedResult.then(deferred.resolve.bind(deferred))
       }
     })
 

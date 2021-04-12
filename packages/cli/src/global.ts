@@ -28,6 +28,15 @@ export function bench (suite: Suite, name: string, target: () => void | Promise<
 
 export function suite (name: string, body: () => void) {
   const benchmarkSuite = new Suite(name)
+
+  Object.assign(global, {
+    bench: bench.bind(null, benchmarkSuite),
+    before: before.bind(null, benchmarkSuite),
+    beforeEach: beforeEach.bind(null, benchmarkSuite),
+    after: after.bind(null, benchmarkSuite),
+    afterEach: afterEach.bind(null, benchmarkSuite)
+  })
+
   body()
   benchmarkSuite.run()
 }
