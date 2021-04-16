@@ -1,6 +1,6 @@
 import {
-  Case
-} from './case'
+  Test
+} from './test'
 import {
   Suite,
   EventHandler
@@ -23,7 +23,7 @@ export function afterEach (suite: Suite, handler: EventHandler) {
 }
 
 export function bench (suite: Suite, name: string, target: () => void | Promise<void>) {
-  suite.addCase(new Case(name, target))
+  suite.addTest(new Test(name, target))
 }
 
 export function suite (name: string, body: () => void) {

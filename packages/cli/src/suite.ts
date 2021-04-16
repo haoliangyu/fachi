@@ -1,4 +1,4 @@
-import { Case } from './case'
+import { Test } from './test'
 
 export type EventHandler = () => void | Promise<void>;
 
@@ -7,7 +7,7 @@ export type EventType = 'before' | 'beforeEach' | 'after' | 'afterEach'
 export class Suite {
   private name: string;
 
-  private cases: Case[] = []
+  private tests: Test[] = []
 
   private before: EventHandler = () => {};
 
@@ -21,8 +21,8 @@ export class Suite {
     this.name = name
   }
 
-  addCase (benmarkCase: Case): void {
-    this.cases.push(benmarkCase)
+  addTest (test: Test): void {
+    this.tests.push(test)
   }
 
   setBefore (handler: EventHandler) {
@@ -44,9 +44,9 @@ export class Suite {
   async run () {
     await this.before()
 
-    for (const benchmarkCase of this.cases) {
+    for (const test of this.tests) {
       await this.beforeEach()
-      await benchmarkCase.run()
+      await test.run()
       await this.afterEach()
     }
 
