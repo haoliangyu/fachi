@@ -42,11 +42,14 @@ export class Suite {
   }
 
   async run () {
+    console.log(this.name)
+
     await this.before()
 
     for (const test of this.tests) {
       await this.beforeEach()
-      await test.run()
+      const result = await test.run()
+      console.log(`\t${this.formatTestResult(result)}`)
       await this.afterEach()
     }
 
@@ -55,5 +58,9 @@ export class Suite {
 
   private setEventHandler (eventType: EventType, handler: EventHandler) {
     this[eventType] = handler
+  }
+
+  private formatTestResult (result: any) {
+    return String(result)
   }
 }

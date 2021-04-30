@@ -21,14 +21,15 @@ export class Test {
       fn: testFunction
     })
 
+    let result;
+
     bench
-    .on('cycle', function (event: any) {
-      console.log(String(event.target))
+    .on('complete', function (event: any) {
+      result = event.target
     })
-    // .on('complete', function () {
-    //   console.log('Fastest is ' + this.filter('fastest').map('name'));
-    // })
     .run()
+
+    return result;
   }
 
   constructTestFunction (target: () => void | Promise<void>, isAsync: boolean): any {
