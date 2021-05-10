@@ -44,16 +44,30 @@ export class Suite {
   async run () {
     console.log(this.name)
 
-    await this.before()
-
-    for (const test of this.tests) {
-      await this.beforeEach()
-      const result = await test.run()
-      console.log(`\t${this.formatTestResult(result)}`)
-      await this.afterEach()
+    try {
+      await this.before()
+    } catch (error) {
+      console.error(error)
+      return
     }
 
-    await this.after()
+    for (const test of this.tests) {
+      try {
+        const result = await test.run()
+        console.log(`\t${this.formatTestResult(result)}`)
+        await this.afterEach()
+      } catch (error) {
+        console.error(error)
+        continue
+      }
+    }
+
+    try {
+      await this.after()
+    } catch (error) {
+      console.error(error)
+      return
+    }
   }
 
   private setEventHandler (eventType: EventType, handler: EventHandler) {

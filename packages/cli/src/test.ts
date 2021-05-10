@@ -21,13 +21,20 @@ export class Test {
       fn: testFunction
     })
 
-    let result;
+    let result, error;
 
     bench
     .on('complete', function (event: any) {
       result = event.target
     })
+    .on('error', function (err: Error) {
+      error = err
+    })
     .run()
+
+    if (error){
+      throw error
+    }
 
     return result;
   }

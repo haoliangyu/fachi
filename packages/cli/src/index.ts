@@ -36,7 +36,11 @@ class Fachi extends Command {
     Object.assign(global, { suite })
 
     filePaths.forEach((path) => {
-      require(path)
+      try {
+        require(path)
+      } catch (error) {
+        console.error(error)
+      }
     })
   }
 }
