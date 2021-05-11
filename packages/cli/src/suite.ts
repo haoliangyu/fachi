@@ -43,13 +43,7 @@ export class Suite {
 
   async run () {
     console.log(this.name)
-
-    try {
-      await this.before()
-    } catch (error) {
-      console.error(error)
-      return
-    }
+    await this.before()
 
     for (const test of this.tests) {
       try {
@@ -61,13 +55,8 @@ export class Suite {
         continue
       }
     }
-
-    try {
-      await this.after()
-    } catch (error) {
-      console.error(error)
-      return
-    }
+    
+    await this.after()
   }
 
   private setEventHandler (eventType: EventType, handler: EventHandler) {

@@ -26,7 +26,7 @@ export function bench (suite: Suite, name: string, target: () => void | Promise<
   suite.addTest(new Test(name, target))
 }
 
-export function suite (name: string, body: () => void) {
+export async function suite (name: string, body: () => void) {
   const benchmarkSuite = new Suite(name)
 
   Object.assign(global, {
@@ -38,5 +38,10 @@ export function suite (name: string, body: () => void) {
   })
 
   body()
-  benchmarkSuite.run()
+
+  try {
+    await benchmarkSuite.run()
+  } catch (error) {
+    console.error(error)
+  }
 }
