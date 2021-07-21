@@ -2,13 +2,17 @@ import Benchmark from 'benchmark'
 import isPromise from 'is-promise'
 
 export class Test {
-  private name: string
+  private _name: string
 
   private target: () => void | Promise<void>
 
   constructor (name: string, target: () => void | Promise<void>) {
-    this.name = name
+    this._name = name
     this.target = target
+  }
+
+  get name () {
+    return this._name
   }
 
   async run () {

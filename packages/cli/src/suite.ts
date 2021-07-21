@@ -1,4 +1,5 @@
 import { Test } from './test'
+import { logSuitRun, logTestRun, logTestEnd, logError } from './log'
 
 export type EventHandler = () => void | Promise<void>;
 
@@ -42,16 +43,20 @@ export class Suite {
   }
 
   async run () {
-    console.log(this.name)
+    logSuitRun(this.name)
+    
     await this.before()
 
     for (const test of this.tests) {
       try {
+        logTestRun(test.name)
         const result = await test.run()
-        console.log(`\t${this.formatTestResult(result)}`)
+        const message = this.formatTestResult(result).replace(test.name, '')
+        logTestEnd(message)
         await this.afterEach()
       } catch (error) {
-        console.error(error)
+        logTestEnd(test.name, true)
+        logError(error)
         continue
       }
     }

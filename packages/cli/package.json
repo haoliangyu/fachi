@@ -52,6 +52,7 @@
     "@oclif/plugin-help": "^3.2.2",
     "@types/benchmark": "^2.1.0",
     "benchmark": "^2.1.4",
+    "cli-ux": "^5.5.1",
     "globby": "^11.0.3",
     "is-glob": "^4.0.1",
     "is-promise": "^4.0.0",

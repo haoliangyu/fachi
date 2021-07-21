@@ -4,6 +4,7 @@ import { Command, flags } from '@oclif/command'
 import { sync as globSync } from 'globby'
 import isGlob from 'is-glob'
 import { suite } from './global'
+import { logFileRun, logError } from './log'
 
 class Fachi extends Command {
   // allows to pass in multiple file paths
@@ -35,11 +36,15 @@ class Fachi extends Command {
 
     Object.assign(global, { suite })
 
-    filePaths.forEach((path) => {
+    filePaths.forEach((path, index, array) => {
       try {
+        logFileRun(path, {
+          current: index + 1,
+          total: array.length
+        })
         require(path)
       } catch (error) {
-        console.error(error)
+        logError(error)
       }
     })
   }
