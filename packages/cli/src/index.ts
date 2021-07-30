@@ -10,7 +10,7 @@ class Fachi extends Command {
   // allows to pass in multiple file paths
   static strict = false
 
-  static description = 'Run benchmark file(s)'
+  static description = '@fachi/cli is a modern benchmark file runner for JavaScript and TypeScript.'
 
   static flags = {
     version: flags.version({ char: 'v' }),
