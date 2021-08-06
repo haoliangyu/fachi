@@ -49,6 +49,7 @@ export class Suite {
 
     for (const test of this.tests) {
       try {
+        await this.beforeEach()
         logTestRun(test.name)
         const result = await test.run()
         const message = this.formatTestResult(result).replace(test.name, '')
